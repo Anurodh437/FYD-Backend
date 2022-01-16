@@ -4,13 +4,14 @@ const app = express();
 const connectDB = require("./config/db");
 
 const dotenv = require("dotenv");
+const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
 connectDB();
 
 app.use(express.json());
 
-
+app.use("/fyd/api/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Api is running ");
