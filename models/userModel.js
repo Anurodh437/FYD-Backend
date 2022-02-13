@@ -37,7 +37,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
-// mongoose hook - (before saving )-> to hash our password using bcrypt js 
+// mongoose hook - (before saving )-> to hash our password using bcrypt js
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
@@ -49,7 +49,7 @@ userSchema.pre("save", async function (next) {
 
 // userSchema method to matchPassword for logging a user
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  // using bcryptjs compare func to match our password for user login 
+  // using bcryptjs compare func to match our password for user login
   return await bcrypt.compare(enteredPassword, this.password);
 };
 

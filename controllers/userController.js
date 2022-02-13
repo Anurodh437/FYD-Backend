@@ -1,14 +1,21 @@
 const e = require("express");
 const asyncHandler = require("express-async-handler");
+const generateToken = require("../config/generateToken");
 const User = require("../models/userModel");
 
+// /api/user/signup
+// POST
 // controller to signup a user
 const signupUser = asyncHandler(async (req, res) => {
-  console.log("Signup user called ");
+  // console.log("Signup user called ");
 
   // extract the required parameters from request
   const { name, email, password, profilePic } = req.body;
 
+  if (!name || !email || !password) {
+    res.status(400);
+    throw new Error("Please enter all the fields");
+  }
   // check if user already exists in our Database or not
   const userExists = await User.findOne({ email });
 
@@ -35,6 +42,7 @@ const signupUser = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         profilePic: user.profilePic,
+        token: generateToken(user._id),
       },
     });
   }
@@ -45,6 +53,8 @@ const signupUser = asyncHandler(async (req, res) => {
   }
 });
 
+// /api/user/login
+// POST
 // controller to login a user
 const loginUser = asyncHandler(async (req, res) => {
   console.log("Login user called ");
@@ -63,6 +73,7 @@ const loginUser = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         profilePic: user.profilePic,
+        token: generateToken(user._id),
       },
     });
   } else {
