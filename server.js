@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
+const postRoutes = require("./routes/postRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddlerware");
 
 dotenv.config();
@@ -15,6 +16,9 @@ app.use(express.json());
 
 // user routes
 app.use("/api/user", userRoutes);
+
+//post routes
+app.use("/api/post", postRoutes);
 
 app.get("/", (req, res) => {
   res.send("Api is running ");
