@@ -6,7 +6,7 @@ const Post = require("../models/postModel");
 // Protected - GET
 const getPosts = expressAsyncHandler(async (req, res) => {
   // getting all posts
-  const posts = await Post.find().populate("postedBy", "name email");
+  const posts = await Post.find().populate("postedBy", "name email profilePic");
 
   res.status(201).json({
     message: "All Posts",
@@ -68,7 +68,7 @@ const getUserPosts = expressAsyncHandler(async (req, res) => {
 const getPostById = expressAsyncHandler(async (req, res) => {
   const post = await Post.findById(req.params.id).populate(
     "postedBy",
-    "name email"
+    "name email profilePic"
   );
 
   // if post is found in the Database
