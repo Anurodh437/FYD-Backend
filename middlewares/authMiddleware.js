@@ -2,6 +2,7 @@ const expressAsyncHandler = require("express-async-handler");
 const JWT = require("jsonwebtoken");
 const User = require("../models/userModel");
 
+//Checking for Autherised users only using jsonwebtoken
 const protect = expressAsyncHandler(async (req, res, next) => {
   let token;
   if (
@@ -12,10 +13,11 @@ const protect = expressAsyncHandler(async (req, res, next) => {
       // getting token after removing Bearer
       token = req.headers.authorization.split(" ")[1];
 
-      //decodes token id
+      //decoding token id - verifying
       const decoded = JWT.verify(token, process.env.JWT_SECRET);
 
       // getting curr user without the password field
+      // putting curr user in req.user field which will be passed on to next function
       req.user = await User.findById(decoded.id).select("-password");
 
       // caling next function
