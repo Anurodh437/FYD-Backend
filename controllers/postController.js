@@ -18,7 +18,7 @@ const getPosts = expressAsyncHandler(async (req, res) => {
 // Protected - POST
 // /api/post/create
 const createPost = expressAsyncHandler(async (req, res) => {
-  const { content, roles, postedBy, image } = req.body;
+  const { content, roles, image } = req.body;
 
   if (!content || !roles) {
     res.status(400);
