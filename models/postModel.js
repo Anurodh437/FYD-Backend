@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema(
       required: true,
     },
     roles: {
-      type: String,
+      type: [],
       required: true,
     },
     image: {
