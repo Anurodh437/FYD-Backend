@@ -4,7 +4,8 @@
   "description": "Backend for Find Your Developer Website",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "Utkarsh Vishwakarma",
   "license": "ISC",
