@@ -20,7 +20,7 @@ const getPosts = expressAsyncHandler(async (req, res) => {
 const createPost = expressAsyncHandler(async (req, res) => {
   const { content, roles, image } = req.body;
 
-  if (!content || !roles) {
+  if (!content || !roles || roles === "" || content === "") {
     res.status(400);
     throw new Error("Please provide all the required fields");
   } else {
